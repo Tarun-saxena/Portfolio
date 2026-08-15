@@ -17,8 +17,3 @@ model UniqueVisitor {
   ipHash    String   @unique
   firstSeen DateTime @default(now())
 }
-
-model PageView {
-  id    Int @id @default(autoincrement())
-  count Int @default(0)
-}
