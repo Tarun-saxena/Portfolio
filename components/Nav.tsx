@@ -72,13 +72,13 @@ export function Nav() {
     return (
         <>
             <header className="w-full border-b border-[var(--border)] bg-[#fafafa] dark:bg-[#090909] sticky top-0 z-40 transition-colors duration-200">
-                <div className="max-w-[1040px] mx-auto px-4 sm:px-6 md:px-8 h-[60px] flex items-center justify-center relative">
+                <div className="max-w-[1040px] mx-auto px-4 sm:px-6 md:px-8 h-[52px] flex items-center justify-center relative">
                     {/* Left & Right 1px Vertical Boundary Lines through Navbar */}
                     <div className="absolute top-0 bottom-0 left-0 w-[1px] bg-[var(--border)] pointer-events-none" />
                     <div className="absolute top-0 bottom-0 right-0 w-[1px] bg-[var(--border)] pointer-events-none" />
 
                     {/* Centered Navigation Links with Smooth Animated Dot */}
-                    <nav ref={navRef} className="relative flex items-center gap-4 sm:gap-8 md:gap-10 py-2">
+                    <nav ref={navRef} className="relative flex items-center gap-3 sm:gap-6 md:gap-8 py-1">
                         {NAV_ITEMS.map((item) => {
                             const isActive = activeSection === item.id;
                             return (
@@ -87,7 +87,7 @@ export function Nav() {
                                     href={item.href}
                                     data-nav-id={item.id}
                                     onClick={() => setActiveSection(item.id)}
-                                    className={`text-xs sm:text-sm font-sans font-medium transition-colors py-1 ${isActive
+                                    className={`text-xs font-sans font-medium transition-colors py-1 ${isActive
                                         ? "text-zinc-900 dark:text-[#f5f5f5]"
                                         : "text-zinc-500 dark:text-[#888888] hover:text-zinc-900 dark:hover:text-[#f5f5f5]"
                                         }`}

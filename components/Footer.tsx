@@ -5,7 +5,7 @@ export function Footer() {
     return (
         <footer className="w-full relative select-none font-mono text-xs text-zinc-500 dark:text-zinc-400">
             {/* Structural Main Row */}
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 py-6 border-b border-[var(--border)] relative">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 py-4 border-b border-[var(--border)] relative">
                 {/* Left: Copyright */}
                 <div className="text-zinc-800 dark:text-zinc-200 font-medium">
                     &copy; {new Date().getFullYear()} Tarun Saxena

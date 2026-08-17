@@ -8,9 +8,9 @@ export function AboutSection() {
         <div className="w-full">
             <SectionHeader index="02 / ABOUT" title="About" />
 
-            <div className="flex flex-col gap-6 max-w-3xl">
+            <div className="flex flex-col gap-4 max-w-2xl">
                 {/* Editorial Introduction Paragraphs */}
-                <div className="flex flex-col gap-4 text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans">
+                <div className="flex flex-col gap-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans">
                     <p>
                         I&apos;m a{" "}
                         <strong className="text-zinc-900 dark:text-white font-semibold underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-4">
@@ -49,13 +49,13 @@ export function AboutSection() {
                 </div>
 
                 {/* Framed Engineering Principle Note */}
-                <div className="p-4 w-full rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 select-none flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                <div className="p-3 sm:p-3.5 w-full rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 select-none flex flex-col sm:flex-row items-start sm:items-center gap-2.5">
                     <div className="flex items-center gap-2">
-                        <span className="font-mono text-xs font-semibold tracking-wider text-emerald-500 uppercase">
+                        <span className="font-mono text-[11px] font-semibold tracking-wider text-emerald-500 uppercase">
                             ENGINEERING PRINCIPLE
                         </span>
                     </div>
-                    <p className="font-serif italic text-sm text-zinc-800 dark:text-zinc-200">
+                    <p className="font-serif italic text-xs sm:text-sm text-zinc-800 dark:text-zinc-200">
                         &ldquo;Ship it end-to-end. Then make it better.&rdquo;
                     </p>
                 </div>

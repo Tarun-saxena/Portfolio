@@ -242,7 +242,7 @@ export function SkillsSection() {
                         : "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
                     touchAction: "none",
                 }}
-                className={`inline-flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg font-sans font-semibold text-xs sm:text-sm cursor-grab active:cursor-grabbing select-none ${isDragging
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg font-sans font-semibold text-xs cursor-grab active:cursor-grabbing select-none ${isDragging
                     ? "z-30 shadow-xl border-zinc-400 dark:border-zinc-500 bg-white dark:bg-[#181818]"
                     : "bg-white text-[#111111] dark:bg-[#111111] dark:text-[#f5f5f5] border border-black/15 dark:border-white/12 shadow-[0_2px_4px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_6px_rgba(0,0,0,0.25)] hover:-translate-y-[2px] hover:border-zinc-400 dark:hover:border-zinc-500 hover:shadow-md"
                     }`}
@@ -258,36 +258,36 @@ export function SkillsSection() {
     return (
         <div className="w-full relative">
             {/* Top Index Metadata Tag */}
-            <div className="font-mono text-xs tracking-wider text-zinc-400 dark:text-zinc-500 uppercase mb-3 select-none">
-                05 / SKILLS
+            <div className="font-mono text-[11px] tracking-wider text-zinc-400 dark:text-zinc-500 uppercase mb-2 select-none">
+                03 / SKILLS
             </div>
 
             {/* Header Row: Bold Clean Sans-serif Heading + "drag me!" annotation */}
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-5">
-                <h2 className="font-sans font-bold text-2xl sm:text-3xl tracking-tight text-zinc-900 dark:text-white">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-4">
+                <h2 className="font-sans font-bold text-xl sm:text-2xl tracking-tight text-zinc-900 dark:text-white">
                     Skills
                 </h2>
 
                 {/* "drag me!" annotation pointing down-left towards the skill pills */}
-                <div className="font-serif italic text-xs sm:text-sm text-zinc-400 dark:text-zinc-500 flex items-center gap-1.5 select-none self-end sm:self-auto pb-1 sm:pb-0">
-                    <span className="font-sans not-italic text-sm sm:text-base text-zinc-400 dark:text-zinc-500">🡧</span>
+                <div className="font-serif italic text-xs text-zinc-400 dark:text-zinc-500 flex items-center gap-1.5 select-none self-end sm:self-auto pb-1 sm:pb-0">
+                    <span className="font-sans not-italic text-xs sm:text-sm text-zinc-400 dark:text-zinc-500">🡧</span>
                     <span>drag me!</span>
 
                 </div>
             </div>
 
             {/* 3 Structured Skill Rows (matching order and layout) */}
-            <div className="w-full flex flex-col gap-2.5 sm:gap-3 py-1 select-none">
+            <div className="w-full flex flex-col gap-2 sm:gap-2.5 py-1 select-none">
                 {/* Row 1 */}
-                <div className="flex flex-wrap gap-2.5 sm:gap-3 items-center">
+                <div className="flex flex-wrap gap-2 sm:gap-2.5 items-center">
                     {ROW_1.map((skill) => renderPill(skill))}
                 </div>
                 {/* Row 2 */}
-                <div className="flex flex-wrap gap-2.5 sm:gap-3 items-center">
+                <div className="flex flex-wrap gap-2 sm:gap-2.5 items-center">
                     {ROW_2.map((skill) => renderPill(skill))}
                 </div>
                 {/* Row 3 */}
-                <div className="flex flex-wrap gap-2.5 sm:gap-3 items-center">
+                <div className="flex flex-wrap gap-2 sm:gap-2.5 items-center">
                     {ROW_3.map((skill) => renderPill(skill))}
                 </div>
             </div>

@@ -101,14 +101,14 @@ export function SectionHeader({
     action?: React.ReactNode;
 }) {
     return (
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[var(--border)] pb-4 mb-8">
-            <div className="flex items-baseline gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[var(--border)] pb-3 mb-6">
+            <div className="flex items-baseline gap-2.5">
                 {index && (
-                    <span className="font-mono text-xs tracking-wider text-zinc-400 dark:text-zinc-500 select-none">
+                    <span className="font-mono text-[11px] tracking-wider text-zinc-400 dark:text-zinc-500 select-none">
                         {index}
                     </span>
                 )}
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                <h2 className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
                     {title}
                 </h2>
             </div>
@@ -128,7 +128,7 @@ export function SectionFrame({
     showTopCrosshairs = true,
     showBottomCrosshairs = false,
     noBottomBorder = false,
-    paddingClassName = "py-8 md:py-12 px-4 sm:px-6 md:px-8",
+    paddingClassName = "py-6 md:py-9 px-4 sm:px-6 md:px-8",
 }: {
     children: React.ReactNode;
     id?: string;

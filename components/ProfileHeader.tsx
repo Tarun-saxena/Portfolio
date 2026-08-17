@@ -5,39 +5,39 @@ import { SocialHoverCard } from "./SocialHoverCard";
 
 export function ProfileHeader() {
     return (
-        <div className="w-full flex flex-col gap-5 select-none py-2">
+        <div className="w-full flex flex-col gap-4 select-none py-1">
             {/* Header Row: Avatar + Name & Subtitle */}
-            <div className="flex items-center gap-4 sm:gap-6">
+            <div className="flex items-center gap-3.5 sm:gap-5">
                 {/* Profile Avatar with Technical Hatch Background & Border */}
-                <div className="relative p-1.5 rounded-[20px] border border-zinc-300 dark:border-zinc-800 bg-zinc-100/90 dark:bg-[#121212]/90 shadow-sm shrink-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_4px,rgba(0,0,0,0.05)_4px,rgba(0,0,0,0.05)_8px)] dark:bg-[repeating-linear-gradient(45deg,transparent,transparent_4px,rgba(255,255,255,0.05)_4px,rgba(255,255,255,0.05)_8px)]">
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                <div className="relative p-1 rounded-[16px] border border-zinc-300 dark:border-zinc-800 bg-zinc-100/90 dark:bg-[#121212]/90 shadow-sm shrink-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_4px,rgba(0,0,0,0.05)_4px,rgba(0,0,0,0.05)_8px)] dark:bg-[repeating-linear-gradient(45deg,transparent,transparent_4px,rgba(255,255,255,0.05)_4px,rgba(255,255,255,0.05)_8px)]">
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
                         <Image
                             src="/avatar.png"
                             alt="Tarun Saxena"
                             fill
                             priority
-                            sizes="(min-width: 640px) 112px, 80px"
+                            sizes="(min-width: 640px) 96px, 64px"
                             className="object-cover"
                         />
                     </div>
                 </div>
 
                 {/* Name & Subtitle */}
-                <div className="flex flex-col justify-center gap-1 sm:gap-1.5">
+                <div className="flex flex-col justify-center gap-0.5 sm:gap-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                        <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                        <h1 className="font-serif text-xl sm:text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">
                             Hey, I’m Tarun Saxena
                         </h1>
                     </div>
 
-                    <p className="font-serif italic text-sm sm:text-base md:text-lg text-zinc-500 dark:text-zinc-400">
+                    <p className="font-serif italic text-xs sm:text-sm md:text-base text-zinc-500 dark:text-zinc-400">
                         19y · fullstack · devops
                     </p>
                 </div>
             </div>
 
             {/* Bio Paragraph */}
-            <p className="font-sans text-sm sm:text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
+            <p className="font-sans text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
                 I’m a{" "}
                 <span className="font-semibold text-zinc-900 dark:text-white underline underline-offset-4 decoration-zinc-400 dark:decoration-zinc-500">
                     Full Stack Developer

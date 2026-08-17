@@ -173,16 +173,16 @@ export default function ProjectsSection() {
             />
 
             {/* 2-Column Grid Layout matching screenshot (compact max-width) */}
-            <div className="max-w-[820px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <div className="max-w-[740px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                 {displayProjects.map((project) => (
                     <Link
                         key={project.id}
                         href={`/projects/${project.slug}`}
-                        className="group flex flex-col justify-between p-4 sm:p-5 rounded-2xl bg-white/60 dark:bg-[#0c0c0e]/80 border border-zinc-200 dark:border-zinc-800/90 hover:border-zinc-400 dark:hover:border-zinc-700 transition-all duration-200 shadow-sm cursor-pointer select-none"
+                        className="group flex flex-col justify-between p-3.5 sm:p-4 rounded-xl bg-white/60 dark:bg-[#0c0c0e]/80 border border-zinc-200 dark:border-zinc-800/90 hover:border-zinc-400 dark:hover:border-zinc-700 transition-all duration-200 shadow-sm cursor-pointer select-none"
                     >
-                        <div className="flex flex-col gap-3.5">
+                        <div className="flex flex-col gap-3">
                             {/* Card Media Preview Container */}
-                            <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800/90 bg-zinc-900 group/img">
+                            <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-800/90 bg-zinc-900 group/img">
                                 {project.imageUrl ? (
                                     <Image
                                         src={project.imageUrl}
@@ -199,28 +199,28 @@ export default function ProjectsSection() {
                                 )}
 
                                 {/* Hover Play Overlay */}
-                                <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2">
-                                    <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform group-hover/img:scale-110 transition-transform">
-                                        <svg className="w-5 h-5 fill-current translate-x-0.5" viewBox="0 0 24 24">
+                                <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-1.5">
+                                    <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform group-hover/img:scale-110 transition-transform">
+                                        <svg className="w-4 h-4 fill-current translate-x-0.5" viewBox="0 0 24 24">
                                             <path d="M8 5v14l11-7z" />
                                         </svg>
                                     </div>
-                                    <span className="text-[11px] font-bold uppercase tracking-wider text-white">
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-white">
                                         VIEW PROJECT
                                     </span>
                                 </div>
                             </div>
 
                             {/* Card Title & Status Badge */}
-                            <div className="flex items-center justify-between gap-3 mt-1">
-                                <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white tracking-tight">
+                            <div className="flex items-center justify-between gap-2 mt-0.5">
+                                <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white tracking-tight">
                                     {project.title}
                                 </h3>
                                 {renderStatusBadge(project.status)}
                             </div>
 
                             {/* Description */}
-                            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed line-clamp-2">
+                            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed line-clamp-2">
                                 {project.description}
                             </p>
                         </div>
