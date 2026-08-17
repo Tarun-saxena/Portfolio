@@ -62,9 +62,8 @@ export function StatusBadge({
     return (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono tracking-wide border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 text-zinc-700 dark:text-zinc-300">
             <span
-                className={`h-1.5 w-1.5 rounded-full ${
-                    isLive ? "bg-emerald-500 animate-pulse" : "bg-amber-500"
-                }`}
+                className={`h-1.5 w-1.5 rounded-full ${isLive ? "bg-emerald-500 animate-pulse" : "bg-amber-500"
+                    }`}
             />
             {textLabel}
         </span>
@@ -129,6 +128,7 @@ export function SectionFrame({
     showTopCrosshairs = true,
     showBottomCrosshairs = false,
     noBottomBorder = false,
+    paddingClassName = "py-8 md:py-12 px-4 sm:px-6 md:px-8",
 }: {
     children: React.ReactNode;
     id?: string;
@@ -136,15 +136,15 @@ export function SectionFrame({
     showTopCrosshairs?: boolean;
     showBottomCrosshairs?: boolean;
     noBottomBorder?: boolean;
+    paddingClassName?: string;
 }) {
     return (
         <section
             id={id}
-            className={`w-full relative ${
-                noBottomBorder ? "" : "border-b border-[var(--border)]"
-            } ${className}`}
+            className={`w-full relative ${noBottomBorder ? "" : "border-b border-[var(--border)]"
+                } ${className}`}
         >
-            <div className="w-full max-w-[1040px] mx-auto px-4 sm:px-6 md:px-8 py-8 md:py-12 relative">
+            <div className={`w-full max-w-[1040px] mx-auto relative ${paddingClassName}`}>
                 {showTopCrosshairs && (
                     <>
                         <Crosshair className="-top-[5px] -left-[5px]" />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Crosshair } from "./ui/Primitives";
+import VisitorCounter from "./VisitorCounter";
 
 export function Footer() {
     return (
@@ -11,17 +11,15 @@ export function Footer() {
                     &copy; {new Date().getFullYear()} Tarun Saxena
                 </div>
 
-                {/* Technical Metadata */}
+                {/* Center: Location */}
                 <div className="flex flex-wrap items-center gap-3 text-[11px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">
                     <span>DELHI, INDIA</span>
-                    <span>•</span>
-                    <span>BUILT WITH NEXT.JS</span>
                 </div>
 
-                {/* Links */}
+                {/* Right: Social Links */}
                 <div className="flex items-center gap-4 text-xs font-sans">
                     <a
-                        href="https://github.com"
+                        href="https://github.com/Tarun-saxena"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition"
@@ -29,7 +27,15 @@ export function Footer() {
                         GitHub
                     </a>
                     <a
-                        href="https://linkedin.com"
+                        href="https://x.com/Tarun__Saxena"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition"
+                    >
+                        X
+                    </a>
+                    <a
+                        href="https://www.linkedin.com/in/tarun-saxena-aa46a523a/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition"
@@ -37,21 +43,26 @@ export function Footer() {
                         LinkedIn
                     </a>
                     <a
-                        href="mailto:tarunsaxena.dev@gmail.com"
+                        href="mailto:tarunsaxena1712@gmail.com"
                         className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition"
                     >
                         Email
                     </a>
+                    <a
+                        href="/resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition"
+                    >
+                        Resume
+                    </a>
                 </div>
-
-                {/* Intentional Crosshair at Top Right Border Intersection */}
-                <Crosshair className="-top-[5px] -right-[5px]" />
             </div>
 
-            {/* Bottom Row: Quiet Document End Marker */}
-            <div className="py-6 flex items-center justify-between text-[11px] text-zinc-400 dark:text-zinc-500 tracking-widest uppercase">
+            {/* Bottom Row: / END on Left, Visitor Counter on Right (below social links) */}
+            <div className="py-6 flex items-center justify-between gap-4 text-[15px] text-zinc-400 dark:text-zinc-500 tracking-widest uppercase">
                 <span>/ END</span>
-                <span>DOCUMENT_VERIFIED // 2026</span>
+                <VisitorCounter />
             </div>
         </footer>
     );

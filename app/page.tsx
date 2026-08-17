@@ -2,13 +2,12 @@ import React from "react";
 import { Nav } from "@/components/Nav";
 import { HeroBanner } from "@/components/HeroBanner";
 import { ProfileHeader } from "@/components/ProfileHeader";
-import { CurrentBuild } from "@/components/CurrentBuild";
 import { AboutSection } from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import GithubHeatmap from "@/components/GithubHeatmap";
 import { SkillsSection } from "@/components/SkillsSection";
-import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
+import { ThemeAudioDock } from "@/components/ThemeAudioDock";
 import { SectionFrame } from "@/components/ui/Primitives";
 
 export default function Home() {
@@ -20,7 +19,7 @@ export default function Home() {
             {/* Main Sections wrapped in SectionFrame containers */}
             <main className="w-full flex flex-col flex-1">
                 {/* Hero Banner Section */}
-                <SectionFrame id="home" showTopCrosshairs={false}>
+                <SectionFrame id="home" showTopCrosshairs={false} paddingClassName="p-1 sm:p-1 md:p-1">
                     <HeroBanner />
                 </SectionFrame>
 
@@ -29,34 +28,24 @@ export default function Home() {
                     <ProfileHeader />
                 </SectionFrame>
 
-                {/* Current Build Section */}
-                <SectionFrame showTopCrosshairs={true}>
-                    <CurrentBuild />
-                </SectionFrame>
-
                 {/* About Section (02 / ABOUT) */}
                 <SectionFrame id="about" showTopCrosshairs={true}>
                     <AboutSection />
                 </SectionFrame>
 
-                {/* Projects Section (03 / PROJECTS) */}
-                <SectionFrame id="projects" showTopCrosshairs={true} className="scroll-mt-20">
-                    <ProjectsSection />
-                </SectionFrame>
-
-                {/* Open Source Section (04 / OPEN SOURCE) */}
-                <SectionFrame id="open-source" showTopCrosshairs={true} className="scroll-mt-20">
-                    <GithubHeatmap />
-                </SectionFrame>
-
-                {/* Skills Section (05 / SKILLS) */}
+                {/* Skills Section (03 / SKILLS) */}
                 <SectionFrame id="skills" showTopCrosshairs={true} className="scroll-mt-20">
                     <SkillsSection />
                 </SectionFrame>
 
-                {/* Contact Section (06 / CONTACT) */}
-                <SectionFrame id="contact" showTopCrosshairs={true} className="scroll-mt-20">
-                    <ContactSection />
+                {/* Projects Section (04 / PROJECTS) */}
+                <SectionFrame id="projects" showTopCrosshairs={true} className="scroll-mt-20">
+                    <ProjectsSection />
+                </SectionFrame>
+
+                {/* Open Source Section (05 / OPEN SOURCE / GITHUB) */}
+                <SectionFrame id="open-source" showTopCrosshairs={true} className="scroll-mt-20">
+                    <GithubHeatmap />
                 </SectionFrame>
             </main>
 
@@ -64,7 +53,9 @@ export default function Home() {
             <SectionFrame showTopCrosshairs={true} showBottomCrosshairs={true} noBottomBorder={true}>
                 <Footer />
             </SectionFrame>
+
+            {/* Floating Theme & Background Music Dock */}
+            <ThemeAudioDock />
         </div>
     );
 }
-

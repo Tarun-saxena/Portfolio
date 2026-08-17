@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function VisitorCounter() {
+export default function VisitorCounter({ className = "" }: { className?: string }) {
     const [count, setCount] = useState<number | null>(null);
 
     useEffect(() => {
@@ -12,8 +12,7 @@ export default function VisitorCounter() {
                 if (!res.ok) throw new Error();
                 const data = await res.json();
                 setCount(data.count);
-            } catch (err) {
-                // Fallback to GET if POST fails
+            } catch {
                 try {
                     const res = await fetch("/api/visitor");
                     if (res.ok) {
@@ -31,9 +30,16 @@ export default function VisitorCounter() {
     if (count === null) return null;
 
     return (
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/30 text-xs font-mono text-zinc-400 backdrop-blur-sm">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>{count.toLocaleString()} unique visitors</span>
+        <div className={`inline-flex items-center gap-1.5 font-mono text-xs sm:text-sm select-none ${className}`}>
+            {/* Gray Visitor Label */}
+            <span className="text-zinc-400 dark:text-zinc-500 font-normal uppercase tracking-wider text-[15px]">
+                VISITORS
+            </span>
+
+            {/* Blue Visitor Number */}
+            <span className="font-semibold text-[#3880ff] dark:text-[#3880ff] tracking-tight text-[15px]">
+                {count.toLocaleString()}
+            </span>
         </div>
     );
 }
