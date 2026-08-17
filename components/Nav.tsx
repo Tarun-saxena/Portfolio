@@ -1,38 +1,66 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Crosshair } from "./ui/Primitives";
+import { NavigationMenuModal } from "./NavigationMenuModal";
 
 const NAV_ITEMS = [
     { id: "home", label: "Home", href: "#home" },
-    { id: "projects", label: "Projects", href: "#projects" },
-    { id: "open-source", label: "Open Source", href: "#open-source" },
     { id: "skills", label: "Skills", href: "#skills" },
+    { id: "projects", label: "Projects", href: "#projects" },
+    { id: "open-source", label: "GitHub", href: "#open-source" },
 ];
 
 export function Nav() {
-    const { theme, setTheme, resolvedTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navRef = useRef<HTMLDivElement>(null);
+    const [dotStyle, setDotStyle] = useState<{ left: number; opacity: number }>({ left: 0, opacity: 0 });
 
     useEffect(() => {
-        setMounted(true);
+        const updateDotPosition = () => {
+            if (!navRef.current) return;
+            const activeEl = navRef.current.querySelector(`[data-nav-id="${activeSection}"]`) as HTMLElement;
+            if (activeEl) {
+                const navRect = navRef.current.getBoundingClientRect();
+                const activeRect = activeEl.getBoundingClientRect();
+                const centerLeft = activeRect.left - navRect.left + activeRect.width / 2 - 2.5;
+                setDotStyle({ left: centerLeft, opacity: 1 });
+            }
+        };
 
-        const sectionElements = NAV_ITEMS.map((item) =>
-            document.getElementById(item.id)
-        ).filter(Boolean) as HTMLElement[];
+        updateDotPosition();
+        window.addEventListener("resize", updateDotPosition);
+        return () => window.removeEventListener("resize", updateDotPosition);
+    }, [activeSection]);
 
+    useEffect(() => {
         const handleScroll = () => {
-            const scrollPosition = window.scrollY + 100;
+            const windowHeight = window.innerHeight;
+            const scrollY = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight;
 
-            for (let i = sectionElements.length - 1; i >= 0; i--) {
-                const section = sectionElements[i];
-                if (section.offsetTop <= scrollPosition) {
-                    setActiveSection(section.id);
-                    break;
+            // 1. Force "open-source" (GitHub) active if at the very bottom of the document
+            if (windowHeight + scrollY >= documentHeight - 30) {
+                setActiveSection("open-source");
+                return;
+            }
+
+            // 2. Iterate forward to activate whichever section has passed into upper 35% of viewport
+            const navIds = ["home", "skills", "projects", "open-source"];
+            let currentActive = "home";
+
+            for (const id of navIds) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= windowHeight * 0.35) {
+                        currentActive = id;
+                    }
                 }
             }
+
+            setActiveSection(currentActive);
         };
 
         window.addEventListener("scroll", handleScroll, { passive: true });
@@ -41,84 +69,73 @@ export function Nav() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const isDark = mounted ? (resolvedTheme || theme) === "dark" : true;
-
-    const toggleTheme = () => {
-        const isCurrentlyDark = document.documentElement.classList.contains("dark");
-        const nextTheme = isCurrentlyDark ? "light" : "dark";
-        setTheme(nextTheme);
-    };
-
     return (
-        <header className="w-full border-b border-[var(--border)] bg-[#fafafa] dark:bg-[#090909] sticky top-0 z-40 transition-colors duration-200">
-            <div className="max-w-[1040px] mx-auto px-4 sm:px-6 md:px-8 h-[60px] flex items-center justify-between relative">
-                {/* Left: Logo / Personal Mark */}
-                <div className="flex items-baseline gap-4">
-                    <a
-                        href="#home"
-                        className="font-serif text-2xl font-bold tracking-tight text-zinc-900 dark:text-white hover:opacity-90 transition select-none"
-                    >
-                        Tarun
-                    </a>
+        <>
+            <header className="w-full border-b border-[var(--border)] bg-[#fafafa] dark:bg-[#090909] sticky top-0 z-40 transition-colors duration-200">
+                <div className="max-w-[1040px] mx-auto px-4 sm:px-6 md:px-8 h-[60px] flex items-center justify-center relative">
+                    {/* Left & Right 1px Vertical Boundary Lines through Navbar */}
+                    <div className="absolute top-0 bottom-0 left-0 w-[1px] bg-[var(--border)] pointer-events-none" />
+                    <div className="absolute top-0 bottom-0 right-0 w-[1px] bg-[var(--border)] pointer-events-none" />
 
-                    {/* Subtle Technical Metadata (Desktop) */}
-                    <span className="hidden md:inline-block font-mono text-[10px] tracking-widest text-zinc-400 dark:text-zinc-500 uppercase select-none">
-                        BUILD 2026 // SYS.01
-                    </span>
-                </div>
-
-                {/* Center / Right: Navigation Links + Theme Toggle */}
-                <div className="flex items-center gap-4 sm:gap-6 md:gap-8">
-                    <nav className="flex items-center gap-3 sm:gap-6 md:gap-7">
+                    {/* Centered Navigation Links with Smooth Animated Dot */}
+                    <nav ref={navRef} className="relative flex items-center gap-4 sm:gap-8 md:gap-10 py-2">
                         {NAV_ITEMS.map((item) => {
                             const isActive = activeSection === item.id;
                             return (
                                 <a
                                     key={item.id}
                                     href={item.href}
+                                    data-nav-id={item.id}
                                     onClick={() => setActiveSection(item.id)}
-                                    className={`relative text-xs sm:text-sm font-sans font-medium transition-colors py-1 ${
-                                        isActive
-                                            ? "text-zinc-900 dark:text-[#f5f5f5]"
-                                            : "text-zinc-500 dark:text-[#888888] hover:text-zinc-900 dark:hover:text-[#f5f5f5]"
-                                    }`}
+                                    className={`text-xs sm:text-sm font-sans font-medium transition-colors py-1 ${isActive
+                                        ? "text-zinc-900 dark:text-[#f5f5f5]"
+                                        : "text-zinc-500 dark:text-[#888888] hover:text-zinc-900 dark:hover:text-[#f5f5f5]"
+                                        }`}
                                 >
                                     {item.label}
-                                    {isActive && (
-                                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-zinc-900 dark:bg-[#f5f5f5]" />
-                                    )}
                                 </a>
                             );
                         })}
+
+                        {/* Smooth Sliding Active Dot Indicator */}
+                        <span
+                            className="absolute bottom-0 w-[5px] h-[5px] rounded-full bg-zinc-900 dark:bg-[#f5f5f5] transition-all duration-300 cubic-bezier(0.4,0,0.2,1) pointer-events-none"
+                            style={{
+                                transform: `translate3d(${dotStyle.left}px, 0, 0)`,
+                                opacity: dotStyle.opacity,
+                            }}
+                        />
                     </nav>
 
-                    {/* Far Right: Technical Theme Toggle (36px x 36px) */}
-                    <button
-                        onClick={toggleTheme}
-                        type="button"
-                        className="w-[36px] h-[36px] flex items-center justify-center rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition cursor-pointer shrink-0"
-                        aria-label="Toggle theme"
-                        title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                    >
-                        {isDark ? (
-                            /* Sun Icon with minimal yellow accent */
-                            <svg className="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    {/* Right Side: Navigation Menu Button */}
+                    <div className="absolute right-4 sm:right-6 md:right-8 flex items-center">
+                        <button
+                            onClick={() => setIsMenuOpen(true)}
+                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-900/70 hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80 transition-colors text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 shadow-sm cursor-pointer"
+                            title="Open Navigation Menu (K)"
+                        >
+                            <svg className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                             </svg>
-                        ) : (
-                            /* Moon Icon */
-                            <svg className="w-4 h-4 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                            </svg>
-                        )}
-                    </button>
-                </div>
+                            <span>K</span>
+                        </button>
+                    </div>
 
-                {/* Corner Crosshair Markers anchored to the 1040px frame line intersection */}
-                <Crosshair className="-bottom-[5px] -left-[5px]" />
-                <Crosshair className="-bottom-[5px] -right-[5px]" />
-            </div>
-        </header>
+                    {/* Corner Crosshair Markers anchored to the 1040px frame line intersections */}
+                    <Crosshair className="-top-[5px] -left-[5px]" />
+                    <Crosshair className="-top-[5px] -right-[5px]" />
+                    <Crosshair className="-bottom-[5px] -left-[5px]" />
+                    <Crosshair className="-bottom-[5px] -right-[5px]" />
+                </div>
+            </header>
+
+            {/* Navigation Menu Modal */}
+            <NavigationMenuModal
+                isOpen={isMenuOpen}
+                onClose={() => setIsMenuOpen(false)}
+                onOpen={() => setIsMenuOpen(true)}
+            />
+        </>
     );
 }
 
