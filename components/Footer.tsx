@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import VisitorCounter from "./VisitorCounter";
 
 export function Footer() {
@@ -48,14 +49,12 @@ export function Footer() {
                     >
                         Email
                     </a>
-                    <a
-                        href="/resume.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <Link
+                        href="/resume"
                         className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition"
                     >
                         Resume
-                    </a>
+                    </Link>
                 </div>
             </div>
 

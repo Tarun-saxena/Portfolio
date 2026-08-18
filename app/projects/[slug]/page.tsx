@@ -111,24 +111,21 @@ export default async function ProjectPage({
     const renderStatusBadge = (status: string) => {
         if (status === "live") {
             return (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-100/90 text-emerald-800 border border-emerald-300 dark:bg-emerald-950/80 dark:text-emerald-400 dark:border-emerald-800/60">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>Live</span>
+                <span className="text-xs font-mono font-medium text-emerald-600 dark:text-emerald-400">
+                    Live
                 </span>
             );
         }
         if (status === "building") {
             return (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-amber-100/90 text-amber-800 border border-amber-300 dark:bg-amber-950/80 dark:text-amber-400 dark:border-amber-800/60">
-                    <span className="w-2 h-2 rounded-full bg-amber-500" />
-                    <span>Building</span>
+                <span className="text-xs font-mono font-medium text-amber-600 dark:text-amber-400">
+                    Building
                 </span>
             );
         }
         return (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-zinc-100 text-zinc-700 border border-zinc-300 dark:bg-zinc-800/60 dark:text-zinc-400 dark:border-zinc-700/60">
-                <span className="w-2 h-2 rounded-full bg-zinc-500" />
-                <span>Not Started</span>
+            <span className="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400">
+                Not Started
             </span>
         );
     };
